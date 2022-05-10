@@ -31,8 +31,15 @@ module warning_sign(length, width, thickness) {
 
 		// Hexagon around "WARNING"
 		difference() {
-			cube([length - 2, width - 2, thickness+2], center=true);
-			cube([length - 3, width - 3, thickness+3], center=true);
+			// TODO: How can I minkowski() the both of these cubes the same way?
+			minkowski() {
+				cube([length - 2, width - 2, thickness+2], center=true);
+				cylinder(1, center=true, $fn=50);
+			}
+			minkowski() {
+				cube([length - 3, width - 3, thickness+3], center=true);
+				cylinder(1, center=true, $fn=50);
+			}
 		}
 		difference() {
 			translate([0, width/4, 0]) cube([length-4, width/3, thickness+2], center=true);
